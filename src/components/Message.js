@@ -1,5 +1,16 @@
 import React from 'react'
 
+function renderLabels(labels) {
+  return labels.map(label => {
+    return(
+      <span className="label label-warning">
+        {label}
+      </span>
+    );
+  })
+}
+
+
 export default function Messages ({message}) {
   return (
     <div>
@@ -7,16 +18,18 @@ export default function Messages ({message}) {
         <div class="col-xs-1">
           <div class="row">
             <div class="col-xs-2">
-              <input type="checkbox" />
+            {message.read ? <input checked type="checkbox" /> : <input type='checkbox'/>}
+
             </div>
             <div class="col-xs-2">
-              <i class="star fa fa-star-o"></i>
+            <i className={message.starred === true ? 'star fa fa-star' : 'star fa fa-star-0'}/>
             </div>
           </div>
         </div>
         <div class="col-xs-11">
+          {renderLabels(message.labels)}
           <a href="#">
-            {message.subject}
+             {message.subject}
           </a>
         </div>
       </div>
