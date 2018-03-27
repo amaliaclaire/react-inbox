@@ -11,10 +11,11 @@ function renderLabels(labels) {
 }
 
 
-export default function Messages ({message}) {
+export default function Messages ({selected, message, toggleRead, toggleStar}) {
+  // console.log(message);
   return (
     <div>
-      <div class="row message read">
+      <div className={message.read === true ? 'row message read selected' : 'row message unread'} >
         <div class="col-xs-1">
           <div class="row">
             <div class="col-xs-2">
@@ -22,11 +23,11 @@ export default function Messages ({message}) {
 
             </div>
             <div class="col-xs-2">
-            <i className={message.starred === true ? 'star fa fa-star' : 'star fa fa-star-0'}/>
+            <i onClick={() => toggleStar(message)} className={message.starred === true ? 'star fa fa-star' : 'star fa fa-star-o'}/>
             </div>
           </div>
         </div>
-        <div class="col-xs-11">
+        <div class="col-xs-11" onClick={() => toggleRead(message)}>
           {renderLabels(message.labels)}
           <a href="#">
              {message.subject}
