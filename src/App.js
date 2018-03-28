@@ -10,7 +10,7 @@ import MessageList from './components/MessageList'
 class App extends Component {
   constructor(props) {
     super(props)
-    this.state = {messages: props.messages}
+    this.state = {messages: props.messages, allSelected: false}
   }
 
   toggleRead = (ChangedMessage) => {
@@ -30,20 +30,7 @@ class App extends Component {
 
   }
 
-  toggleCheckBox = () => {
-    let messages = this.state.messages.map(message => {
-      if(message === true){
-        if (message.selected) {
-          return {...message, selected: false}
-        }
-        else {
-          return {...message, selected: true}
-        }
-      }
-      return message
-    })
-    this.setState({messages})
-  }
+
 
 
   toggleStar = (ChangedStar) => {
@@ -61,12 +48,12 @@ class App extends Component {
     this.setState({messages})
   }
 
-  selectedAllMessages = () => {
+  toggleMessages = () => {
     let selectedAllMessages = this.state.messages.map(message => {
       message.read = true
       return message
     })
-    this.setState({messages: selectedAllMessages})
+    this.setState({messages: selectedAllMessages, allSelected: true})
   }
 
 
@@ -74,7 +61,7 @@ class App extends Component {
   render() {
     return (
       <div>
-      <Toolbar selectedAllMessages={this.selectedAllMessages} toggleCheckBox = {this.toggleCheckBox}/>
+      <Toolbar toggleMessages={this.toggleMessages} allSelected={this.state.allSelected} />
       <ComposeMessageForm />
       <MessageList messages={this.state.messages} toggleRead={this.toggleRead} toggleStar={this.toggleStar}/>
       </div>

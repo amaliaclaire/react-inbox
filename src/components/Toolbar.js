@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function ToolBar ({messages, selectedMessageCount, selectedAllMessages, toggleCheckBox}) {
+export default function ToolBar ({messages, selectedMessageCount, toggleMessages, allSelected}) {
 // console.log('messages', messages);
   return (
     <div class="row toolbar">
@@ -10,8 +10,8 @@ export default function ToolBar ({messages, selectedMessageCount, selectedAllMes
           unread messages
         </p>
 
-        <button onClick={() => selectedAllMessages()}class="btn btn-default">
-          <i class="fa fa-check-square-o"></i>
+        <button onClick={() => toggleMessages()} class="btn btn-default">
+        <i className={ allSelected ? "fa fa-check-square-o" : "fa fa-square-o"  } />
         </button>
 
         <button class="btn btn-default">
