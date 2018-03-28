@@ -11,8 +11,7 @@ function renderLabels(labels) {
 }
 
 
-export default function Messages ({selected, message, toggleRead, toggleStar}) {
-  // console.log(message);
+export default function Messages ({selected, message, toggleRead, toggleStar, toggleCheckBox}) {
   return (
     <div>
       <div className={message.read === true ? 'row message read selected' : 'row message unread'} >

@@ -30,6 +30,22 @@ class App extends Component {
 
   }
 
+  toggleCheckBox = () => {
+    let messages = this.state.messages.map(message => {
+      if(message === true){
+        if (message.selected) {
+          return {...message, selected: false}
+        }
+        else {
+          return {...message, selected: true}
+        }
+      }
+      return message
+    })
+    this.setState({messages})
+  }
+
+
   toggleStar = (ChangedStar) => {
     let messages = this.state.messages.map(message => {
       if(message === ChangedStar){
@@ -45,11 +61,20 @@ class App extends Component {
     this.setState({messages})
   }
 
+  selectedAllMessages = () => {
+    let selectedAllMessages = this.state.messages.map(message => {
+      message.read = true
+      return message
+    })
+    this.setState({messages: selectedAllMessages})
+  }
+
+
+
   render() {
-    console.log(this.state.messages);
     return (
       <div>
-      <Toolbar />
+      <Toolbar selectedAllMessages={this.selectedAllMessages} toggleCheckBox = {this.toggleCheckBox}/>
       <ComposeMessageForm />
       <MessageList messages={this.state.messages} toggleRead={this.toggleRead} toggleStar={this.toggleStar}/>
       </div>
